@@ -27,9 +27,13 @@ const reducer = (state: State, action: Action) => {
     }
 };
 
-const GlobalStateContext = createContext<[State, React.Dispatch<Action>]>([
+// Define a new type for your context that includes the setNetwork function
+type GlobalStateContextType = [State, React.Dispatch<Action>, (network: string) => void];
+
+const GlobalStateContext = createContext<GlobalStateContextType>([
     initialState,
     () => null,
+    () => {},  // Default value for setNetwork function
 ]);
 
 export const useGlobalState = () => useContext(GlobalStateContext);
@@ -41,20 +45,22 @@ interface GlobalStateProviderProps {
 export const GlobalStateProvider: React.FC<GlobalStateProviderProps> = ({children}) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
+    const setNetwork = (network: string) => {
+        const newInfuraProvider = new InfuraWebSocketProvider(network, process.env.REACT_APP_INFURA_PUBLIC_API_KEY);
+        dispatch({ type: "SET_INFURA_PROVIDER", payload: newInfuraProvider });
+
+        const newEtherscanProvider = new EtherscanProvider(network, process.env.REACT_APP_ETHERSCAN_API_KEY);
+        dispatch({ type: "SET_ETHERSCAN_PROVIDER", payload: newEtherscanProvider });
+    }
+
     useEffect(() => {
-        const initProvider = () => {
-            const newInfuraProvider = new InfuraWebSocketProvider("mainnet", process.env.REACT_APP_INFURA_PUBLIC_API_KEY);
-            dispatch({ type: "SET_INFURA_PROVIDER", payload: newInfuraProvider });
-
-            const newEtherscanProvider = new EtherscanProvider("mainnet", process.env.REACT_APP_ETHERSCAN_API_KEY);
-            dispatch({ type: "SET_ETHERSCAN_PROVIDER", payload: newEtherscanProvider });
-        };
-
-        initProvider();
+        // Initialize with the mainnet
+        setNetwork("mainnet");
     }, []);
 
+    // Provide setNetwork function in the context
     return (
-        <GlobalStateContext.Provider value={[state, dispatch]}>
+        <GlobalStateContext.Provider value={[state, dispatch, setNetwork]}>
             {children}
         </GlobalStateContext.Provider>
     );

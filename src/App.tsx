@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {useGlobalState} from "./utils/GlobalState";
@@ -9,14 +9,23 @@ import {
     Box,
     Button,
     CssBaseline,
-    CssVarsProvider, IconButton, Input, Typography,
+    CssVarsProvider, IconButton, Input, Select, selectClasses, Typography, Option
 } from '@mui/joy';
-import {Menu} from "@mui/icons-material";
-
+import {KeyboardArrowDown, Menu} from "@mui/icons-material";
+import ChainSelect from "./components/ChainSelect";
+import BlockCard from "./components/BlockCard";
+import {Block} from "ethers";
 
 
 function App() {
-  const [state, dispatch] = useGlobalState();
+    const [state, dispatch, setNetwork] = useGlobalState();
+    // setNetwork('matic');
+
+
+
+
+
+
 
   return (
       <CssVarsProvider defaultMode="dark">
@@ -46,6 +55,9 @@ function App() {
               </Box>
               <Button/>
           </Layout.Header>
+
+          <ChainSelect/>
+
 
 
       </CssVarsProvider>
