@@ -3,6 +3,7 @@ import { Typography, Card, Divider, Box } from "@mui/joy";
 import { Block } from "ethers";
 
 import {shortenAddress} from "../utils/ShortenAddress";
+import TransactionAccordion from "./TransactionAccordion";
 
 interface BlockCardProps {
     block: Block;
@@ -14,6 +15,9 @@ const BlockCard: React.FC<BlockCardProps> = ({ block }) => {
     const [showDetailed, setShowDetailed] = useState<boolean>(false);
 
     const [cardWidth, setCardWidth] = useState<number>(300); // Add a state for cardWidth
+
+
+
 
     useEffect(() => {
         if (block) {
@@ -38,7 +42,7 @@ const BlockCard: React.FC<BlockCardProps> = ({ block }) => {
             <Typography>Block #{block.number}</Typography>
             <Divider />
 
-
+            <TransactionAccordion hashes={transactions}/>
 
             <Divider />
             <Typography>Hash: {shortenAddress(block.hash, 5)}</Typography>
