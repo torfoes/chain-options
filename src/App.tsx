@@ -19,6 +19,7 @@ import BlockChain from "./components/BlockChain";
 import EthPriceDisplay from "./components/EthPriceDisplay";
 import MerkleChip from './components/MerkleChip';
 import ChainDisplay from "./components/ChainDisplay";
+import MerkleTree from "./components/flow/MerkleTree";
 
 //testing some things out
 
@@ -33,45 +34,46 @@ function App() {
   return (
       <CssVarsProvider defaultMode="dark">
         <CssBaseline />
-          <Layout.Header>
-              <IconButton variant={'plain'} color={'neutral'}>
-                  <Menu/>
-              </IconButton>
-              <Box sx={{ flexGrow: 0, display: 'flex', justifyContent: 'flex-start' }}>
-                  <Typography level='h5' variant={'plain'} color={'neutral'}>Block Explorer</Typography>
-              </Box>
+          {/*<Layout.Header>*/}
+          {/*    <IconButton variant={'plain'} color={'neutral'}>*/}
+          {/*        <Menu/>*/}
+          {/*    </IconButton>*/}
+          {/*    <Box sx={{ flexGrow: 0, display: 'flex', justifyContent: 'flex-start' }}>*/}
+          {/*        <Typography level='h5' variant={'plain'} color={'neutral'}>Block Explorer</Typography>*/}
+          {/*    </Box>*/}
 
-              <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}> {/* Add this wrapper */}
-                  <Input
-                      size="md"
-                      placeholder="Search by block / transaction / address…"
-                      // startDecorator={<SearchRoundedIcon color="disabled" />}
-                      sx={{
-                          flexBasis: '500px',
-                          display: {
-                              xs: 'none',
+          {/*    <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}> /!* Add this wrapper *!/*/}
+          {/*        <Input*/}
+          {/*            size="md"*/}
+          {/*            placeholder="Search by block / transaction / address…"*/}
+          {/*            // startDecorator={<SearchRoundedIcon color="disabled" />}*/}
+          {/*            sx={{*/}
+          {/*                flexBasis: '500px',*/}
+          {/*                display: {*/}
+          {/*                    xs: 'none',*/}
 
-                              sm: 'flex',
-                          },
-                      }}
-                  />
-              </Box>
-              <EthPriceDisplay/>
-          </Layout.Header>
-
-
-
-          <Stack direction={"column"}>
-
-              <ChainDisplay/>
-
-              <Divider/>
-
-              <ChainDisplay/>
-
-          </Stack>
+          {/*                    sm: 'flex',*/}
+          {/*                },*/}
+          {/*            }}*/}
+          {/*        />*/}
+          {/*    </Box>*/}
+          {/*    <EthPriceDisplay/>*/}
+          {/*</Layout.Header>*/}
 
 
+
+          {/*<Stack direction={"column"}>*/}
+
+          {/*    <ChainDisplay/>*/}
+
+          {/*    <Divider/>*/}
+
+          {/*    <ChainDisplay/>*/}
+
+          {/*</Stack>*/}
+
+
+        <MerkleTree/>
 
 
       </CssVarsProvider>
