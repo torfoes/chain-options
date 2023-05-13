@@ -38,6 +38,8 @@ const BlockCard: React.FC<BlockCardProps> = ({ block }) => {
             <Typography>Block #{block.number}</Typography>
             <Divider />
 
+
+
             <Divider />
             <Typography>Hash: {shortenAddress(block.hash, 5)}</Typography>
         </Card>

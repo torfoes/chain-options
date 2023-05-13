@@ -16,6 +16,8 @@ import ChainSelect from "./components/ChainSelect";
 import BlockCard from "./components/BlockCard";
 import {Block} from "ethers";
 import BlockChain from "./components/BlockChain";
+import KeccakDivider from "./components/KeccakDivider";
+import EthPriceDisplay from "./components/EthPriceDisplay";
 
 
 function App() {
@@ -49,7 +51,7 @@ function App() {
                       }}
                   />
               </Box>
-              <Button/>
+              <EthPriceDisplay/>
           </Layout.Header>
 
           <ChainSelect/>
@@ -57,8 +59,9 @@ function App() {
           <Stack direction={"column"}>
               <BlockChain chainName={'mainnet'} useWebSocketProvider={true}/>
               <Divider/>
-              <BlockChain chainName={'optimism'} useWebSocketProvider={false}/>
+              <BlockChain chainName={'matic'} useWebSocketProvider={false}/>
           </Stack>
+          <KeccakDivider/>
       </CssVarsProvider>
   );
 }

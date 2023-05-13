@@ -5,6 +5,7 @@ import Sheet from '@mui/joy/Sheet';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import {Stack} from "@mui/joy";
 import {useEffect, useRef} from "react";
+import KeccakDivider from "./KeccakDivider";
 
 function Root(props: BoxProps) {
     return (
@@ -73,7 +74,7 @@ const ChainLayout: React.FC<BlockLayoutProps> = ({ children }) => {
                 spacing={2}
                 justifyContent="flex-start"
                 alignItems="center"
-                divider={<ArrowForwardIcon />}
+                divider={<KeccakDivider />}
                 sx={{ overflowX: "auto", height: "100%", width: "100%", p: 2 }}
             >
                 {children.map((child, index) => (
