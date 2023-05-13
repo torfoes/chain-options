@@ -55,9 +55,36 @@ function Header(props: BoxProps) {
 }
 
 
+interface BlockLayoutProps {
+    children: React.ReactNode[];
+}
+function ChainLayout({ children }: BlockLayoutProps) {
+    return (
+        <Box>
+            <Stack
+                direction="row"
+                spacing={2}
+                justifyContent="flex-start" // Change justifyContent to "flex-start"
+                alignItems="center"
+                divider={<ArrowForwardIcon />}
+                sx={{ overflowX: 'auto', height: '100%', width: '100%', p: 2 }}
+            >
+                {children.map((child, index) => (
+                    <Box key={index} flexShrink={0} id={`block-${index}`}>
+                        {child}
+                    </Box>
+                ))}
+
+            </Stack>
+        </Box>
+    );
+}
+
+
 
 
 export default {
     Root,
     Header,
+    BlockLayout: ChainLayout,
 };

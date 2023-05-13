@@ -9,17 +9,18 @@ import {
     Box,
     Button,
     CssBaseline,
-    CssVarsProvider, IconButton, Input, Select, selectClasses, Typography, Option
+    CssVarsProvider, IconButton, Input, Select, selectClasses, Typography, Option, Divider, Stack
 } from '@mui/joy';
 import {KeyboardArrowDown, Menu} from "@mui/icons-material";
 import ChainSelect from "./components/ChainSelect";
 import BlockCard from "./components/BlockCard";
 import {Block} from "ethers";
+import BlockChain from "./components/BlockChain";
 
 
 function App() {
     const [state, dispatch, setNetwork] = useGlobalState();
-    // setNetwork('matic');
+
 
 
 
@@ -58,8 +59,11 @@ function App() {
 
           <ChainSelect/>
 
-
-
+          <Stack direction={"column"}>
+              <BlockChain chainName={'mainnet'} useWebSocketProvider={true}/>
+              <Divider/>
+              <BlockChain chainName={'matic'} useWebSocketProvider={false}/>
+          </Stack>
       </CssVarsProvider>
   );
 }
