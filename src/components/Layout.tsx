@@ -3,9 +3,9 @@ import Box, { BoxProps } from '@mui/joy/Box';
 import Sheet from '@mui/joy/Sheet';
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import {Stack} from "@mui/joy";
-import {useEffect, useRef} from "react";
-import KeccakDivider from "./KeccakDivider";
+import {Button, Card, Stack} from "@mui/joy";
+import {useEffect, useRef, useState} from "react";
+import PrevHashDivider from "./MerkleChip";
 
 function Root(props: BoxProps) {
     return (
@@ -55,11 +55,10 @@ function Header(props: BoxProps) {
         />
     );
 }
-
-
 interface BlockLayoutProps {
     children: React.ReactNode[];
 }
+
 const ChainLayout: React.FC<BlockLayoutProps> = ({ children }) => {
     const endRef = useRef<any>(null);
 
@@ -74,20 +73,26 @@ const ChainLayout: React.FC<BlockLayoutProps> = ({ children }) => {
                 spacing={2}
                 justifyContent="flex-start"
                 alignItems="center"
-                divider={<KeccakDivider />}
                 sx={{ overflowX: "auto", height: "100%", width: "100%", p: 2 }}
             >
+
                 {children.map((child, index) => (
-                    <Box key={index} flexShrink={0} id={`block-${index}`}>
-                        {child}
-                    </Box>
+                    <>
+                        <Box key={index} flexShrink={0} id={`block-${index}`}>
+                            {child}
+                        </Box>
+
+                        <Box>
+                            {index != (children.length -1) ? <ArrowForwardIcon /> : null}
+                        </Box>
+                    </>
+
                 ))}
                 <div ref={endRef} />
             </Stack>
         </Box>
     );
 };
-
 
 
 export default {

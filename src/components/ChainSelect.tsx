@@ -3,17 +3,10 @@ import { useGlobalState } from '../utils/GlobalState';
 import {Select, Option, selectClasses, SvgIcon, Typography} from "@mui/joy";
 import { KeyboardArrowDown } from "@mui/icons-material";
 
-// Import your SVGs
-import { ReactComponent as Ethereum } from '../assets/svg/ethereum.svg';
-import { ReactComponent as Polygon } from '../assets/svg/polygon.svg';
-import { ReactComponent as Optimism } from '../assets/svg/optimism.svg';
+import {chainSVGs} from "../utils/chainConfig";
 import {Icon} from "@mui/material";
 
 export default function ChainSelect() {
-    // Get the setNetwork function from the global state
-    const [, , setNetwork] = useGlobalState();
-
-
 
     const handleSelectChange = (event: React.SyntheticEvent | null, newValue: string | null) => {
         // Change the network when the selected option changes
@@ -23,12 +16,6 @@ export default function ChainSelect() {
         }
     };
 
-
-
-    // Set default network
-    React.useEffect(() => {
-        setNetwork("mainnet");
-    }, []);
 
     return (
         <Select
@@ -47,22 +34,48 @@ export default function ChainSelect() {
                 },
             }}
         >
-            <Option value="ethereum">
-
-                <Typography startDecorator={<SvgIcon component={Ethereum} />}>
+            <Option value="ethereum" label={<Typography startDecorator={
+                chainSVGs.mainnet
+                    ? <SvgIcon component={chainSVGs.mainnet} />
+                    : null
+            }>
+                Ethereum
+            </Typography>}>
+                <Typography startDecorator={chainSVGs.mainnet
+                    ? <SvgIcon component={chainSVGs.mainnet} /> : null}>
                     Ethereum
                 </Typography>
+
+
             </Option>
 
-            <Option value="polygon">
-                <Typography startDecorator={<SvgIcon component={Polygon} />}>
+            <Option value="polygon" label={<Typography startDecorator={
+                chainSVGs.matic
+                    ? <SvgIcon component={chainSVGs.matic} />
+                    : null
+            }>
+                Polygon
+            </Typography>}>
+
+                <Typography startDecorator={chainSVGs.matic
+                    ? <SvgIcon component={chainSVGs.matic} /> : null}>
                     Polygon
                 </Typography>
+
             </Option>
-            <Option value="optimism">
-                <Typography startDecorator={<SvgIcon component={Optimism} />}>
+
+
+            <Option value="optimism" label={<Typography startDecorator={chainSVGs.matic
+                ? <SvgIcon component={chainSVGs.matic} /> : null}>
+                Optimism
+            </Typography>}>
+
+
+                <Typography startDecorator={chainSVGs.optimism
+                    ? <SvgIcon component={chainSVGs.optimism} /> : null}>
                     Optimism
                 </Typography>
+
             </Option>
         </Select>
     );

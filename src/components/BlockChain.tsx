@@ -3,11 +3,13 @@ import BlockListener from "./BlockListener";
 import BlockBeggar from "./BlockBeggar";
 import BlockCard from "./BlockCard";
 import Layout from "./Layout";
+import { Divider } from "@mui/joy";
 import { Block } from "ethers";
 import {Box} from "@mui/joy";
+import { ChainName } from "../utils/chainConfig"; // import ChainName from the config file
 
 interface BlockChainProps {
-    chainName: string;
+    chainName: ChainName; // Use ChainName enum here
     useWebSocketProvider: boolean;
 }
 
@@ -24,7 +26,7 @@ const BlockChain: React.FC<BlockChainProps> = ({ chainName, useWebSocketProvider
             // If the block is already in the list, return the list unchanged
             return prevList;
         });
-    }, []);
+    }, []); // Empty array ensures that function reference is stable across renders
 
     return (
         <>
@@ -35,8 +37,10 @@ const BlockChain: React.FC<BlockChainProps> = ({ chainName, useWebSocketProvider
             )}
 
             <Layout.BlockLayout>
-                {blockList.map((block) => (
-                    <BlockCard key={block.number} block={block} />
+                {blockList.map((block, index) => (
+                    <Box key={block.number}>
+                        <BlockCard block={block} chainName={chainName}/>
+                    </Box>
                 ))}
             </Layout.BlockLayout>
         </>

@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import {useGlobalState} from "./utils/GlobalState";
 import Layout from "./components/Layout";
-
+import { ChainName } from './utils/chainConfig';
 
 import {
     Box,
@@ -16,13 +16,14 @@ import ChainSelect from "./components/ChainSelect";
 import BlockCard from "./components/BlockCard";
 import {Block} from "ethers";
 import BlockChain from "./components/BlockChain";
-import KeccakDivider from "./components/KeccakDivider";
 import EthPriceDisplay from "./components/EthPriceDisplay";
+import MerkleChip from './components/MerkleChip';
+
 
 
 function App() {
     const [state, dispatch, setNetwork] = useGlobalState();
-
+    const [chainName, setChain] = useState<string>('mainnet');
 
 
   return (
@@ -54,14 +55,26 @@ function App() {
               <EthPriceDisplay/>
           </Layout.Header>
 
-          <ChainSelect/>
+
 
           <Stack direction={"column"}>
-              <BlockChain chainName={'mainnet'} useWebSocketProvider={true}/>
+              <Box>
+                  <ChainSelect/>
+                  <BlockChain chainName={ChainName.Mainnet} useWebSocketProvider={true}/>
+              </Box>
+
+
               <Divider/>
-              <BlockChain chainName={'matic'} useWebSocketProvider={false}/>
+
+              {/*inside here give details about the chain and speed and stuff*/}
+              <Box>
+                <BlockChain chainName={ChainName.Matic} useWebSocketProvider={false}/>
+              </Box>
           </Stack>
-          <KeccakDivider/>
+
+
+
+
       </CssVarsProvider>
   );
 }

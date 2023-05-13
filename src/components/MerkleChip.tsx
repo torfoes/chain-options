@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { Box, Chip, Modal, Typography, Sheet, ModalClose } from "@mui/joy";
+import { Block } from "ethers";
+import {shortenAddress} from "../utils/ShortenAddress";
 
-//ADD MODAL TO THIS COMPONENT AND SHOW HOW KECCAK IS CALCULATED AFTER YOUR GET THE LINES WORKING
-export default function KeccakDivider() {
+interface MerkleChipProps {
+    block: Block;
+}
+
+const MerkleChip: React.FC<MerkleChipProps> = ({ block }) => {
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => setOpen(true);
@@ -11,14 +16,10 @@ export default function KeccakDivider() {
     return (
         <>
             <Chip
-                color="success"
+                color="primary"
                 onClick={handleOpen}
-                sx={{
-                    transform: "rotate(90deg)",
-                    zIndex: 2,
-                }}
             >
-                Keccak256
+                Merkle Root: ${shortenAddress(block.hash, 5)}
             </Chip>
 
             <Modal
@@ -31,7 +32,7 @@ export default function KeccakDivider() {
                 <Sheet
                     variant="outlined"
                     sx={{
-                        maxWidth: 500,
+                        maxWidth: 400,
                         borderRadius: 'md',
                         p: 3,
                         boxShadow: 'lg',
@@ -59,11 +60,14 @@ export default function KeccakDivider() {
                         Block Information
                     </Typography>
                     <Typography id="modal-desc" textColor="text.tertiary">
-                        // Replace this with the actual block information
-                        This is placeholder block information.
+                        The Merkle Root for this block is {block.parentHash}.
+
+                        The Merkle Root is calculated by taking the hashes of all the transactions in the block, pairing them up, hashing the pairs, pairing up those results, and so on until only one hash remains - the Merkle Root. This ensures that even a small change in any transaction will result in a different Merkle Root.
                     </Typography>
                 </Sheet>
             </Modal>
         </>
     );
 };
+
+export default MerkleChip;
