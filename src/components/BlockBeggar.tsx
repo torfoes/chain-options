@@ -32,7 +32,7 @@ const BlockBeggar: React.FC<BlockBeggarProps> = ({ onBlockMined, chainName }) =>
             }
         };
 
-        const intervalId = setInterval(fetchLatestBlock, 1500);
+        const intervalId = setInterval(fetchLatestBlock, 250);
 
         return () => clearInterval(intervalId);
     }, [infuraProvider, onBlockMined, lastBlockNumber]);

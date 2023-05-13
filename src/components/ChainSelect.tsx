@@ -6,23 +6,26 @@ import { KeyboardArrowDown } from "@mui/icons-material";
 import {chainSVGs} from "../utils/chainConfig";
 import {Icon} from "@mui/material";
 
-export default function ChainSelect() {
+interface ChainSelectProps {
+    onSelectChange: (value: string) => void;
+}
 
-    const handleSelectChange = (event: React.SyntheticEvent | null, newValue: string | null) => {
+
+export default function ChainSelect({ onSelectChange }: ChainSelectProps) {
+
+    const handleSelectChange = (event: React.MouseEvent | React.KeyboardEvent | React.FocusEvent | null, newValue: string | null) => {
         // Change the network when the selected option changes
         if (newValue !== null) {
-            console.log("New value: " + newValue);
-            // setNetwork(newValue);
+            onSelectChange(newValue);
         }
     };
-
 
     return (
         <Select
             // uh, this is not working like i want so i just used the
-            defaultValue={"ethereum"}
+            defaultValue={"mainnet"}
+            onChange={handleSelectChange}
 
-            // onChange={handleSelectChange}
             indicator={<KeyboardArrowDown />}
             sx={{
                 width: 160,
@@ -34,7 +37,7 @@ export default function ChainSelect() {
                 },
             }}
         >
-            <Option value="ethereum" label={<Typography startDecorator={
+            <Option value="mainnet" label={<Typography startDecorator={
                 chainSVGs.mainnet
                     ? <SvgIcon component={chainSVGs.mainnet} />
                     : null
@@ -49,7 +52,7 @@ export default function ChainSelect() {
 
             </Option>
 
-            <Option value="polygon" label={<Typography startDecorator={
+            <Option value="matic" label={<Typography startDecorator={
                 chainSVGs.matic
                     ? <SvgIcon component={chainSVGs.matic} />
                     : null

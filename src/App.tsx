@@ -18,6 +18,7 @@ import {Block} from "ethers";
 import BlockChain from "./components/BlockChain";
 import EthPriceDisplay from "./components/EthPriceDisplay";
 import MerkleChip from './components/MerkleChip';
+import ChainDisplay from "./components/ChainDisplay";
 
 
 
@@ -58,18 +59,13 @@ function App() {
 
 
           <Stack direction={"column"}>
-              <Box>
-                  <ChainSelect/>
-                  <BlockChain chainName={ChainName.Mainnet} useWebSocketProvider={true}/>
-              </Box>
 
+              <ChainDisplay/>
 
               <Divider/>
 
-              {/*inside here give details about the chain and speed and stuff*/}
-              <Box>
-                <BlockChain chainName={ChainName.Matic} useWebSocketProvider={false}/>
-              </Box>
+              <ChainDisplay/>
+
           </Stack>
 
 
