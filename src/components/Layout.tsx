@@ -4,6 +4,7 @@ import Sheet from '@mui/joy/Sheet';
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import {Stack} from "@mui/joy";
+import {useEffect, useRef} from "react";
 
 function Root(props: BoxProps) {
     return (
@@ -58,28 +59,33 @@ function Header(props: BoxProps) {
 interface BlockLayoutProps {
     children: React.ReactNode[];
 }
-function ChainLayout({ children }: BlockLayoutProps) {
+const ChainLayout: React.FC<BlockLayoutProps> = ({ children }) => {
+    const endRef = useRef<any>(null);
+
+    useEffect(() => {
+        endRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [children]);
+
     return (
         <Box>
             <Stack
                 direction="row"
                 spacing={2}
-                justifyContent="flex-start" // Change justifyContent to "flex-start"
+                justifyContent="flex-start"
                 alignItems="center"
                 divider={<ArrowForwardIcon />}
-                sx={{ overflowX: 'auto', height: '100%', width: '100%', p: 2 }}
+                sx={{ overflowX: "auto", height: "100%", width: "100%", p: 2 }}
             >
                 {children.map((child, index) => (
                     <Box key={index} flexShrink={0} id={`block-${index}`}>
                         {child}
                     </Box>
                 ))}
-
+                <div ref={endRef} />
             </Stack>
         </Box>
     );
-}
-
+};
 
 
 

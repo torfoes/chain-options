@@ -23,11 +23,6 @@ function App() {
 
 
 
-
-
-
-
-
   return (
       <CssVarsProvider defaultMode="dark">
         <CssBaseline />
@@ -62,7 +57,7 @@ function App() {
           <Stack direction={"column"}>
               <BlockChain chainName={'mainnet'} useWebSocketProvider={true}/>
               <Divider/>
-              <BlockChain chainName={'matic'} useWebSocketProvider={false}/>
+              <BlockChain chainName={'optimism'} useWebSocketProvider={false}/>
           </Stack>
       </CssVarsProvider>
   );
