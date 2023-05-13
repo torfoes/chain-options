@@ -73,7 +73,7 @@ const ChainLayout: React.FC<BlockLayoutProps> = ({ children }) => {
                 spacing={2}
                 justifyContent="flex-start"
                 alignItems="center"
-                sx={{ overflowX: "auto", height: "100%", width: "100%", p: 2 }}
+                sx={{ overflowX: "auto", overflowY: "hidden", height: "100%", width: "100%", p: 2 }}
             >
 
                 {children.map((child, index) => (
@@ -83,7 +83,7 @@ const ChainLayout: React.FC<BlockLayoutProps> = ({ children }) => {
                         </Box>
 
                         <Box>
-                            {index != (children.length -1) ? <ArrowForwardIcon /> : null}
+                            {index !== (children.length -1) ? <ArrowForwardIcon /> : null}
                         </Box>
                     </>
 

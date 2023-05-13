@@ -20,6 +20,9 @@ import EthPriceDisplay from "./components/EthPriceDisplay";
 import MerkleChip from './components/MerkleChip';
 import ChainDisplay from "./components/ChainDisplay";
 
+//testing some things out
+
+
 
 
 function App() {

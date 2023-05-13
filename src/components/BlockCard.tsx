@@ -28,7 +28,7 @@ const BlockCard: React.FC<BlockCardProps> = ({ block, chainName }) => {
 
     return (
         <Card
-            sx={{ width: "275", scrollbarWidth: 'thin', scrollbarColor: `${chainColors[chainName]} transparent` }}
+            sx={{ width: "250", scrollbarWidth: 'thin', scrollbarColor: `${chainColors[chainName]} transparent` }}
         >
 
             <Link
@@ -40,7 +40,7 @@ const BlockCard: React.FC<BlockCardProps> = ({ block, chainName }) => {
                 Block #{block.number}
             </Link>
 
-            <List sx={{ maxHeight: 250,
+            <List sx={{ maxHeight: 175,
                 overflowY: 'auto',
             }}>
 
